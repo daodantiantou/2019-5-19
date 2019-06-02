@@ -20,7 +20,13 @@ model=linear_model.LinearRegression().fit(x_train,y_train)
 
 @app.route('/')
 def fangjia():
-    return render_template('fangjia.html')
+    return render_template('login.html')
+
+@app.route('/login',methods=['POST'])
+def login():
+    sex=request.form['sex']
+    print(sex)
+    return '123'
 
 @app.route('/',methods=['POST'])
 def yuce():
@@ -40,7 +46,11 @@ def yuce():
     halls = int(request.form['halls'])
     arr[8] = halls
     area = int(request.form['area'])
-    arr[9] = area
+    if area:
+        arr[9] = area
+    else:
+        arr[9]=1
+
     subway = int(request.form['subway'])
     arr[10] = subway
     school = int(request.form['school'])
