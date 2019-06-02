@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<style>
+    h1,h2{
+        text-align: center;
+    }
+    form{
+        width: 300px;
+        height: auto;
+        margin: 0 auto;
+        padding: 10px;
+        border: 3px solid pink;
+        border-radius: 10px;
+    }
+    button{
+        margin-left: 110px;
+    }
+</style>
+<body>
+    <h1>房价预测</h1>
+    <h2>填写下表进行预测</h2>
+    <form action="/" method="post">
+        <label for="">请选择地区</label>
+        <select name="dist" id="" class="form-control">
+            <option value="0">朝阳</option>
+            <option value="1">东城</option>
+            <option value="2">丰台</option>
+            <option value="3">海淀</option>
+            <option value="4">西城</option>
+            <option value="-1">石景山</option>
+        </select>
+        <label for="">请选择楼层范围</label>
+        <select name="floor" class="form-control">
+            <option value="-1">高层</option>
+            <option value="5">中层</option>
+            <option value="6">低层</option>
+        </select>
+        <label for="">请选择几室</label>
+        <select name="roomnum" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <label for="">请选择几厅</label>
+        <select name="halls" class="form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <label for="area">请输入面积</label>
+        <input type="text" id="area" name="area" class="form-control">
+        <label for="">是否靠近地铁</label><br>
+        <label for="subway1">是</label>
+        <input type="radio" name="subway" id="subway1" value="1" checked>
+        <label for="subway2">否</label>
+        <input type="radio" name="subway" id="subway2" value="0">
+        <br><label for="">是否靠近学校</label><br>
+        <label for="school1">是</label>
+        <input type="radio" name="school" id="school1" value="1" checked>
+        <label for="school2">否</label>
+        <input type="radio" name="school" id="school2" value="0">
+        <br><button type="submit" class="btn btn-primary">提交</button>
+    </form>
+{% if data %}
+    <h1 style="color: red">{{ data['res'] }}</h1>
+{% endif %}
+
+
+</body>
+</html>
