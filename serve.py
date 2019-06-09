@@ -18,17 +18,35 @@ from sklearn.model_selection import train_test_split
 x_train,x_text,y_train,y_text=train_test_split(x,y,test_size=0.3,random_state=42)
 model=linear_model.LinearRegression().fit(x_train,y_train)
 
+
+ldata=pd.read_csv('./logistic_dat.csv')
+ldata1=ldata.dropna()
+ldata2=pd.get_dummies(ldata1.Gender)
+ldata3=ldata2.drop('Female',axis=1)
+# print(ldata1)
+ldata4=pd.concat([ldata3,ldata1[['Age','EstimatedSalary','Purchased']]],axis=1)
+print(ldata4)
+x=ldata4.iloc[:,:-1]
+y=ldata4['Purchased']
+from sklearn import linear_model
+model1=linear_model.LogisticRegression(max_iter=10000,tol=0.00001,solver='liblinear').fit(x,y)
+
 @app.route('/')
 def fangjia():
     return render_template('login.html')
 
 @app.route('/login',methods=['POST'])
 def login():
-    sex=request.form['sex']
-    print(sex)
-    return '123'
+    sex=int(request.form['sex'])
+    age=int(request.form['age'])
+    salary=int(request.form['salary'])
+    res=model1.predict([[sex,age,salary]])[0]
+    if res:
+        return render_template('fangjia.html')
+    else:
+        return render_template('index.html')
 
-@app.route('/',methods=['POST'])
+@app.route('/yuce',methods=['POST'])
 def yuce():
     arr=[0,0,0,0,0,0,0,0,0,0,0,0]
     dist=int(request.form['dist'])
